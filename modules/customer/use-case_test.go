@@ -49,7 +49,27 @@ func Test_useCaseCustomer_CreateCustomer(t *testing.T) {
 
 		// Check call mock repository
 		customerRepoMock.EXPECT().CreateCustomer(gomock.Eq(&expectedCustomer)).Times(1)
+	})
 
+	// Case 2: Testing create customer failure
+	t.Run("Create customer failure", func(t *testing.T) {
+		// Initiate input yang menghasilkan kondisi salah
+		customerParam := CustomerParam{
+			First_name: "", // Contoh: First_name kosong
+			Last_name:  "Lawson",
+			Email:      "michael.lawson@reqres.in",
+			Avatar:     "https://reqres.in/img/faces/7-image.jpg",
+		}
+
+		// Call method CreateCustomer
+		actualCustomer, err := au.CreateCustomer(customerParam)
+
+		// Check result
+		assert.Error(t, err)
+		assert.Equal(t, entities.Customer{}, actualCustomer)
+
+		// Check call mock repository (tidak boleh dipanggil)
+		customerRepoMock.EXPECT().CreateCustomer(gomock.Any()).Times(0)
 	})
 }
 
