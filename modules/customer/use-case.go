@@ -12,6 +12,7 @@ type UseCaseCustomer interface {
 	UpdateCustomer(customer CustomerParam, id uint) (any, error)
 	DeleteCustomer(id uint) (any, error)
 }
+
 type useCaseCustomer struct {
 	customerRepo repositories.CustomerInterfaceRepo
 }
@@ -33,6 +34,7 @@ func (uc useCaseCustomer) CreateCustomer(customer CustomerParam) (entities.Custo
 	}
 	return *newCustomer, nil
 }
+
 func (uc useCaseCustomer) GetCustomerById(id uint) (entities.Customer, error) {
 	var customer entities.Customer
 	customer, err := uc.customerRepo.GetCustomerById(id)
