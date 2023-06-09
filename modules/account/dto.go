@@ -3,6 +3,7 @@ package account
 import (
 	"crmservice/dto"
 	"crmservice/entities"
+	"time"
 )
 
 type LoginActorParam struct {
@@ -16,6 +17,8 @@ type ActorParam struct {
 	RoleId     uint   `json:"role_id"`
 	IsVerified string `json:"is_verified"`
 	IsActive   string `json:"is_active"`
+	CreatedAt  time.Time
+	UpdatedAt  time.Time
 }
 
 type SuccessCreate struct {
